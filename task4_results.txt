@@ -1,0 +1,50 @@
+Question: Name one programming language and explain in one sentence why a beginner should learn it.
+Runs per temperature: 3
+============================================================
+
+TEMPERATURE = 0
+----------------------------------------
+Run 1: Python is an excellent first language for beginners because its simple, readable syntax closely resembles everyday English, allowing new programmers to focus on learning core concepts without getting bogged down by complex rules.
+Run 2: Python is an excellent first language for beginners because its simple, readable syntax closely resembles everyday English, allowing new programmers to focus on learning core concepts without getting bogged down by complex rules.
+Run 3: Python is an excellent first language for beginners because its simple, readable syntax closely resembles everyday English, allowing new programmers to focus on learning core concepts without getting bogged down by complex rules.
+
+TEMPERATURE = 0.7
+----------------------------------------
+Run 1: Python: A beginner should learn Python because its simple, readable syntax closely resembles everyday English, making it easy to grasp fundamental programming concepts without getting bogged down by complex rules.
+Run 2: Python is an excellent choice for beginners because its simple, readable syntax closely resembles everyday English, allowing newcomers to focus on learning core programming concepts without getting bogged down by complex language rules.
+Run 3: Python: A beginner should learn Python because its simple, readable syntax closely resembles everyday English, making it easier to grasp core programming concepts without getting bogged down by complex syntax.
+
+TEMPERATURE = 1.2
+----------------------------------------
+Run 1: Python, because its simple, readable syntax and extensive learning resources make it ideal for building a strong foundation in programming concepts.
+Run 2: Python is the most beginner-friendly programming language due to its simple, readable syntax that closely resembles everyday English, making it easier to understand fundamental concepts and focus on problem-solving rather than complex syntax.
+Run 3: Python; its simple syntax and readability make it the most accessible language for beginners to grasp core programming concepts without getting bogged down by complex code structures.
+
+
+============================================================
+ANALYSIS
+============================================================
+
+ACCURACY
+All three temperatures returned the correct answer (Python).
+Temperature does not affect factual accuracy when the answer is unambiguous.
+
+DIVERSITY
+  temperature=0   — zero diversity: all 3 runs are word-for-word identical
+  temperature=0.7 — minimal diversity: Python in all runs, phrasing slightly varies, meaning identical
+  temperature=1.2 — moderate diversity: Python in all runs, but sentence structure and emphasis differ
+                    (some stress "resources", others "problem-solving")
+
+CREATIVITY
+No temperature produced an unexpected answer (e.g. Lua, Scratch, Go).
+When training data has a strong consensus, even temperature=1.2 does not push the model
+beyond the obvious choice. Creative effects are more visible on open-ended prompts.
+
+RECOMMENDATIONS
+  temperature=0   — pipelines requiring reproducibility: code generation, data extraction, tests.
+                    Same input always produces the same output.
+  temperature=0.7 — most production use cases: chatbots, Q&A, summarization.
+                    Phrasing varies but factual content stays stable.
+  temperature=1.2 — brainstorming, option generation, creative copywriting.
+                    Noticeable structural variety; benefit is minimal on narrow factual questions
+                    and grows significantly on open-ended creative prompts.
