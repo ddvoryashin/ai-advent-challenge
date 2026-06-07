@@ -1,0 +1,361 @@
+TASK:
+Write an algorithm to determine whether a string is a palindrome, ignoring spaces, punctuation and case. Examples: "A man, a plan, a canal: Panama" -> true, "race a car" -> false.
+
+============================================================
+1. DIRECT ANSWER
+============================================================
+Here's an algorithm to determine if a string is a palindrome while ignoring spaces, punctuation, and case:
+
+## Algorithm
+
+**Input**: A string `s`
+**Output**: Boolean (true if palindrome, false otherwise)
+
+### Steps:
+
+1. **Initialize two pointers**:
+   - `left` = 0 (start of string)
+   - `right` = length of `s` - 1 (end of string)
+
+2. **While `left < right`**:
+   - **Skip non-alphanumeric characters from left**: 
+     - While `left < right` AND `s[left]` is NOT alphanumeric, increment `left`
+   - **Skip non-alphanumeric characters from right**:
+     - While `left < right` AND `s[right]` is NOT alphanumeric, decrement `right`
+   
+   - **Compare characters**:
+     - Convert both `s[left]` and `s[right]` to lowercase
+     - If they are NOT equal, return `false`
+   
+   - **Move pointers inward**:
+     - Increment `left`
+     - Decrement `right`
+
+3. **Return `true`** (all characters matched)
+
+### Pseudocode:
+
+```
+function isPalindrome(s):
+    left = 0
+    right = s.length - 1
+    
+    while left < right:
+        while left < right AND not isAlphanumeric(s[left]):
+            left++
+        
+        while left < right AND not isAlphanumeric(s[right]):
+            right--
+        
+        if toLowerCase(s[left]) != toLowerCase(s[right]):
+            return false
+        
+        left++
+        right--
+    
+    return true
+
+function isAlphanumeric(c):
+    return (c is letter 'a'-'z' or 'A'-'Z') OR (c is digit '0'-'9')
+```
+
+### Example Walkthrough:
+
+**Input**: "A man, a plan, a canal: Panama"
+
+| left | right | s[left] | s[right] | Compare | Result |
+|------|-------|---------|----------|---------|--------|
+| 0    | 29    | A       | a        | A==a    | match  |
+| 2    | 27    | m       | m        | m==m    | match  |
+| 4    | 25    | a       | a        | a==a    | match  |
+| 6    | 23    | n       | n        | n==n    | match  |
+| 8    | 21    | a       | a        | a==a    | match  |
+| 10   | 19    | p       | p        | p==p    | match  |
+| 12   | 17    | l       | l        | l==l    | match  |
+| 14   | 15    |
+
+[tokens: 600]
+
+============================================================
+2. STEP-BY-STEP
+============================================================
+Here's a step-by-step algorithm to determine whether a string is a palindrome, ignoring spaces, punctuation, and case:
+
+## Step 1: Preprocess the string
+- Remove all non-alphanumeric characters (spaces, punctuation, etc.)
+- Convert all characters to lowercase for case-insensitive comparison
+
+## Step 2: Compare characters from both ends
+- Use two pointers: one at the start (left) and one at the end (right)
+- Move them toward the center, comparing characters
+
+## Step 3: Return the result
+
+---
+
+### Detailed Algorithm:
+
+```
+function isPalindrome(s):
+    # Step 1: Preprocess
+    cleaned = ""
+    for each character c in s:
+        if c is alphanumeric (letter or digit):
+            cleaned += lowercase(c)
+    
+    # Step 2: Two-pointer comparison
+    left = 0
+    right = length(cleaned) - 1
+    
+    while left < right:
+        if cleaned[left] != cleaned[right]:
+            return false
+        left = left + 1
+        right = right - 1
+    
+    # Step 3: All characters matched
+    return true
+```
+
+---
+
+### Walkthrough with Example 1: "A man, a plan, a canal: Panama"
+
+**Step 1 - Preprocess:**
+- Remove non-alphanumeric: "AmanaplanacanalPanama"
+- Convert to lowercase: "amanaplanacanalpanama"
+
+**Step 2 - Two-pointer comparison:**
+```
+left = 0 ('a'), right = 20 ('a') → match, move inward
+left = 1 ('m'), right = 19 ('m') → match, move inward
+...continues until...
+left = 10 ('c'), right = 10 ('c') → loop ends (left < right is false)
+```
+
+**Step 3:** All matched → return `true`
+
+---
+
+### Walkthrough with Example 2: "race a car"
+
+**Step 1 - Preprocess:**
+- Remove non-alphanumeric: "raceacar"
+- Already lowercase: "raceacar"
+
+**Step 2 - Two-pointer comparison:**
+```
+left = 0 ('r'), right = 7 ('r') → match
+left = 1 ('a'), right = 6 ('a') → match
+left = 2 ('c'), right = 5 ('c') → match
+left = 3 ('e'), right = 4 ('a') → 'e' ≠ 'a' → return false
+```
+
+**Step 3:** Mismatch found → return `false`
+
+---
+
+### Time and Space Complexity:
+- **Time complexity:** O(n) where n is the length of the string
+- **Space complexity:** O(n) for the cleaned string (can be optimized to O(1) by processing in-place)
+
+### Optimized version (O(1) space,
+
+[tokens: 600]
+
+============================================================
+3. META-PROMPT -> SOLUTION
+============================================================
+Here's a solution in Python, which is clear and efficient:
+
+```python
+def is_palindrome(s: str) -> bool:
+    """
+    Determines whether a given string is a palindrome,
+    ignoring spaces, punctuation, and case.
+    """
+    # Step 1: Normalize the string
+    # - Convert to lowercase
+    # - Keep only alphanumeric characters (letters and digits)
+    normalized = ''.join(ch.lower() for ch in s if ch.isalnum())
+
+    # Step 2: Check if the normalized string equals its reverse
+    # Using two-pointer approach for O(n) time and O(1) extra space
+    left = 0
+    right = len(normalized) - 1
+
+    while left < right:
+        if normalized[left] != normalized[right]:
+            return False
+        left += 1
+        right -= 1
+
+    return True
+```
+
+**Explanation of the logic:**
+
+1. **Normalize the input:**  
+   - Convert all characters to lowercase so we ignore case.  
+   - Filter out anything that isn't a letter or digit (e.g., spaces, commas, colons). This leaves only the core characters to compare.
+
+2. **Two-pointer comparison:**  
+   - Use two pointers: `left` starts at the beginning, `right` at the end.  
+   - Compare characters at each pointer position.  
+   - If they ever differ, it's not a palindrome → return `False`.  
+   - Move the pointers inward until they meet (the middle of the string).  
+   - If all comparisons match, return `True`.
+
+**Example runs:**
+- `is_palindrome("A man, a plan, a canal: Panama")` → `True`  
+- `is_palindrome("race a car")` → `False`
+
+**Time complexity:** O(n) — single pass over the string to normalize and another pass for comparison.  
+**Space complexity:** O(n) due to the normalized copy. The two-pointer part uses O(1) extra space.
+
+[tokens: 428]
+
+============================================================
+4. EXPERT PANEL
+============================================================
+ANALYST:
+A robust algorithm:
+1. Initialize two pointers, left = 0, right = string length - 1.
+2. While left < right:
+   - While left < right and character at left is not alphanumeric, increment left.
+   - While left < right and character at right is not alphanumeric, decrement right.
+   - Compare lowercased characters at left and right:
+     - If not equal, return false.
+   - Increment left, decrement right.
+3. Return true.
+
+Edge cases: empty string → true; single character → true; null input → handle as needed. Time O(n), space O(1).
+
+ENGINEER:
+Clean, idiomatic Python:
+
+```python
+import re
+
+def is_palindrome(s: str) -> bool:
+    # Filter and normalize in one step
+    cleaned = re.sub(r'[^a-zA-Z0-9]', '', s).lower()
+    return cleaned == cleaned[::-1]
+```
+
+This is concise, readable, and leverages Python's string slicing. For very large strings, the two-pointer approach (ANALYST) is more memory efficient, but this is the most Pythonic.
+
+CRITIC:
+Flaws in both:
+- ANALYST's two-pointer is correct but verbose and harder to read. It also assumes ASCII; non-ASCII characters (e.g., "café") may not be handled correctly without Unicode support.
+- ENGINEER's solution creates a new string, which is O(n) memory. This is inefficient for large inputs. Also, `re.sub` adds overhead; a list comprehension with `str.isalnum()` is faster.
+
+Better compromise:
+
+```python
+def is_palindrome(s: str) -> bool:
+    left, right = 0, len(s) - 1
+    while left < right:
+        if not s[left].isalnum():
+            left += 1
+        elif not s[right].isalnum():
+            right -= 1
+        elif s[left].lower() != s[right].lower():
+            return False
+        else:
+            left += 1
+            right -= 1
+    return True
+```
+
+This is O(n) time and O(1) space, handles Unicode alphanumeric characters properly, and is clean enough to read. The ENGINEER's approach is acceptable only for small strings or rapid prototyping.
+
+[tokens: 497]
+
+
+============================================================
+COMPARISON OF FOUR APPROACHES
+============================================================
+
+TASK: determine whether a string is a palindrome,
+ignoring spaces, punctuation and case.
+
+------------------------------------------------------------
+1. TIME / SPACE COMPLEXITY
+------------------------------------------------------------
+
+Approach 1 (Direct):      Time O(n), Space O(1)
+  Two-pointer pseudocode — correct, but response was cut off
+  at the 600-token limit; no Python code produced.
+
+Approach 2 (Step-by-step): Time O(n), Space O(n)
+  Builds a cleaned copy of the string. Mentions an O(1)
+  optimisation but the response was truncated before showing it.
+
+Approach 3 (Meta-prompt):  Time O(n), Space O(n)
+  Normalises the string with join(), then runs two-pointer on
+  the copy — the copy is unnecessary; [::-1] would suffice.
+
+Approach 4-Analyst:        Time O(n), Space O(1)
+  Two-pointer, pseudocode only, no Python.
+
+Approach 4-Engineer:       Time O(n), Space O(n)
+  re.sub + [::-1] slice — two string copies.
+
+Approach 4-Critic:         Time O(n), Space O(1)  <- WINNER
+  Best of all: O(1) space and isalnum() handles Unicode
+  correctly (unlike explicit ASCII ranges).
+
+------------------------------------------------------------
+2. CONCISENESS
+------------------------------------------------------------
+
+Approach 1:      No Python produced (truncated at 600 tokens).
+Approach 2:      No Python produced (truncated at 600 tokens).
+Approach 3:      ~12 lines — full working Python with docstring.
+Approach 4-Engineer: 2 lines  <- WINNER (most concise)
+Approach 4-Critic:   ~10 lines — compact, no redundancy.
+
+Note: approaches 1 and 2 did not deliver runnable code at all.
+
+------------------------------------------------------------
+3. READABILITY AND MAINTAINABILITY
+------------------------------------------------------------
+
+Approach 1:
+  Only pseudocode; response cut off mid-table. Unusable as-is.
+
+Approach 2:
+  Best walkthrough of the two examples (correct this run),
+  but no Python and response is incomplete.
+
+Approach 3:  <- WINNER (documentation quality)
+  Docstring, per-step comments, clear two-phase structure.
+  The normalise-then-compare logic is easy to follow and test.
+
+Approach 4-Engineer:
+  Declarative and brief, but introduces a regex dependency
+  without a clear reason (isalnum() is sufficient and faster).
+
+Approach 4-Critic:  <- WINNER (control-flow clarity)
+  if/elif/else chain reads like plain English; no continue
+  jumps. isalnum() is Unicode-safe. Best production-ready code.
+
+------------------------------------------------------------
+KEY OBSERVATION
+------------------------------------------------------------
+
+In this run, approaches 1 and 2 both hit the 600-token limit
+and were truncated — in the previous run they finished in 421
+and 514 tokens respectively. This reveals a core weakness of
+the "direct" and "step-by-step" prompts: without an explicit
+format constraint, the model picks an unpredictable level of
+detail and may never reach the actual code.
+
+OVERALL WINNERS BY CRITERION:
+  Space efficiency  -> Approach 4-Critic
+  Conciseness       -> Approach 4-Engineer
+  Readability/docs  -> Approach 3 (meta-prompt)
+  Reliability       -> Approach 3 (only approach that
+                       consistently produced complete Python
+                       code within the token budget)
