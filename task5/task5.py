@@ -4,7 +4,7 @@ from openai import OpenAI
 from pathlib import Path
 from datetime import datetime
 
-CONFIG_FILE = Path(__file__).parent / "credentials.json"
+CONFIG_FILE = Path(__file__).parent.parent / "credentials.json"
 OUTPUT_FILE = Path(__file__).parent / "task5_results.txt"
 
 

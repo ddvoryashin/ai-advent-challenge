@@ -3,7 +3,7 @@ import json
 from openai import OpenAI
 from pathlib import Path
 
-CONFIG_FILE = Path(__file__).parent / "credentials.json"
+CONFIG_FILE = Path(__file__).parent.parent / "credentials.json"
  
  
 def load_api_key() -> str:
