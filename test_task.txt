@@ -1,29 +1,16 @@
 Сontext:
-- About the company "Korica", a chain of coffee-bakery shops.
-  6 locations in one city + delivery via its own app and via aggregators.
-  Staff ~50 people. Revenue is growing, but the data lives in scattered systems,
-  and management "doesn't understand what's actually going on".
-- POS system at the registers — sales, receipts, line items, payments. Exports a CSV
-  once a day to the accountant's email. The clocks at the registers are sometimes off,
-  and one location has the wrong timezone set.
-- Mobile app (pre-order + loyalty program) — its own cloud DB, has an API, but only
-  returns the last 90 days.
-- Two delivery aggregators — each with its own dashboard and export format
-  (Excel for one, an API for the other). The same customer in the app and in an
-  aggregator is treated as different "people".
-- 1C — goods, cost price, inventory, payroll. The item catalog in 1C and the dish
-  names in the POS match only partially ("Cappuccino 0.3" vs "Cappuccino medium").
-- Google Sheets — the marketer manually tracks promos and ad spend; shop managers
-  keep shift schedules.
+- About the company "Korica", a chain of coffee-bakery shops. 6 locations in one city + delivery via its own app and via aggregators. Staff ~50 people. Revenue is growing, but the data lives in scattered systems, and management "doesn't understand what's actually going on".
+- POS system at the registers — sales, receipts, line items, payments. Exports a CSV once a day to the accountant's email. The clocks at the registers are sometimes off, and one location has the wrong timezone set.
+- Mobile app (pre-order + loyalty program) — its own cloud DB, has an API, but only returns the last 90 days.
+- Two delivery aggregators — each with its own dashboard and export format (Excel for one, an API for the other). The same customer in the app and in an aggregator is treated as different "people".
+- 1C — goods, cost price, inventory, payroll. The item catalog in 1C and the dish names in the POS match only partially ("Cappuccino 0.3" vs "Cappuccino medium").
+- Google Sheets — the marketer manually tracks promos and ad spend; shop managers keep shift schedules.
 - Feedback forms — arrive in a Telegram bot and are stored nowhere.
 
 Current task:
-1. Owner — a single dashboard: revenue/margin by location, by channel, by day,
-   plan vs actual comparison.
-2. Marketer — understand customer LTV and promo effectiveness (campaign ROI),
-   segment customers for mailings.
-3. Operations director — demand forecast by location and hour (to avoid queues
-   and pastry write-offs).
+1. Owner needs a single dashboard: revenue/margin by location, by channel, by day, plan vs actual comparison.
+2. Marketer — understand customer LTV and promo effectiveness (campaign ROI), segment customers for mailings.
+3. Operations director — demand forecast by location and hour (to avoid queues and pastry write-offs).
 4. Accountant — the numbers in reports must reconcile with 1C (this is pain #1).
 5. Shop managers — see their own location promptly, ideally "in real time".
 
