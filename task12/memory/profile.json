@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "role": "executive sponsor",
+  "style": "high-level, business-focused",
+  "format": "a 3-bullet executive summary",
+  "language": "English",
+  "constraints": [
+    "no code",
+    "focus on business impact and risk, not implementation"
+  ]
+}

@@ -1,0 +1,3 @@
+[profile] User works at company 'Korica', a chain of coffee-bakery shops.
+[profile] Company size is about 50 staff.
+[knowledge] Company's data is scattered across 1C (goods, cost price, inventory, payroll) and Google Sheets (promos, ad spend).

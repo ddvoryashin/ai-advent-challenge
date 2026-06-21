@@ -1,0 +1,1 @@
+Current task is to create a single dashboard for revenue/margin by location, channel, and day, with plan vs actual comparison.
