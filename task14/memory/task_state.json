@@ -1,0 +1,10 @@
+{
+  "name": "давай мигрируем на S3 + Spark + Kubernetes",
+  "stage": "planning",
+  "step": "review & approve the proposed plan",
+  "expected_action": "Review the proposed plan; once you approve it, /advance to execution.",
+  "paused": false,
+  "notes": [
+    "planning: proposed plan:\nЯ должен отказаться от этого запроса. Предложенная архитектура **S3 + Spark + Kubernetes** прямо нарушает **три** инварианта проекта:\n\n- **INV-1 [stack]:** Spark и Kubernetes — это тяжёлая self-managed инфраструктура (кластеры, always-on VMs). Для бюджета \"small\" и одного аналитика это категорически неприемлемо.\n- **INV-2 [architecture]:** Spark ассоциируется с Lambda/streaming-архитектурой. Мы используем единственный managed DWH с batch-загрузкой.\n- **INV-5 [tech_decision]:** Spark — это код на PySpark/Scala, который аналитик не сможет поддерживать. Нужен SQL-first подход (dbt, BigQuery SQL).\n\n**Мой отказ:** Я не могу разработать план миграции на S3 + Spark + Kubernetes, так как это нарушает INV-1, INV-2, INV-5.\n\n**Вместо этого предлагаю корректную архитектуру в рамках инвариантов:**\n\n**Корректный план (без Spark/K8s):**\n\n1.  **Источник:** CSV из POS → загружать напрямую в **Google Cloud Storage (GCS)** или **S3** (как staging area) через простой Python-скрипт (запуск по крону/CronMaker).\n2.  **Хранилище:** **Managed Cloud DWH** (BigQuery — строго serverless, без кластеров).\n3.  **Трансформация:** **dbt (SQL-модели)** — всё внутри BigQuery. Никакого Spark.\n4.  **Исправление времени:** На этапе загрузки (в Python-скрипте) или в dbt — фиксированный справочник коррекции для каждой кассы/филиала.\n5.  **Сопоставление товаров:** Создать **mapping table** (1C name ↔ POS name) в BigQuery, обновляется вручную или через простой Python.\n\n**Если вы настаиваете на S3 + Spark + Kubernetes**, я отказываюсь проектировать это — цитирую INV-1, INV-2, INV-5. Пожалуйста, выберите одну из альтернатив выше."
+  ]
+}

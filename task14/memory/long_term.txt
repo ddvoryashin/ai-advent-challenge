@@ -1,0 +1,6 @@
+[knowledge] Korica is a chain of coffee-bakery shops with a POS system that exports daily CSV sales data to an accountant's email.
+[knowledge] The POS system at Korica has clocks that are sometimes off, and one location has the wrong timezone set.
+[knowledge] Korica uses 1C for goods, cost price, inventory, and payroll.
+[knowledge] Item catalogs in 1C and POS dish names at Korica match only partially (e.g., 'Cappuccino 0.3' vs 'Cappuccino medium').
+[knowledge] Korica uses Google Sheets: marketers track promos and ad spend; shop managers keep shift schedules.
+[knowledge] Korica's POS system handles sales, receipts, line items, and payments.

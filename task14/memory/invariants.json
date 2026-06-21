@@ -1,0 +1,38 @@
+[
+  {
+    "id": "INV-1",
+    "category": "stack",
+    "statement": "Use ONLY managed, low-cost cloud services. Self-managed heavy infrastructure is forbidden: no Kafka, no Spark/Hadoop, no Kubernetes, no self-hosted clusters or always-on VMs for data processing.",
+    "rationale": "small budget, no dedicated data engineer — a semi-technical analyst maintains it"
+  },
+  {
+    "id": "INV-2",
+    "category": "architecture",
+    "statement": "The architecture is a SINGLE managed cloud data warehouse as the one source of truth, loaded by batch ELT (daily, hourly at most). No Lambda/streaming/true real-time architecture; 'near real-time' must mean frequent batch, not event streaming.",
+    "rationale": "must be operable by one analyst and stay within a small budget"
+  },
+  {
+    "id": "INV-3",
+    "category": "business_rule",
+    "statement": "1C is the SOLE authoritative source for money (revenue, cost, margin). Every financial figure on any dashboard must reconcile to 1C; no metric may bypass, override or silently diverge from 1C.",
+    "rationale": "accountant reconciliation with 1C is the #1 pain point"
+  },
+  {
+    "id": "INV-4",
+    "category": "pii",
+    "statement": "Customer PII (names, phone numbers) is stored encrypted and pseudonymised in the warehouse, access-restricted, and NEVER exported to aggregator dashboards or sent to third-party / external LLM services.",
+    "rationale": "legal PII requirements; customer data must not leak to third parties"
+  },
+  {
+    "id": "INV-5",
+    "category": "tech_decision",
+    "statement": "The transformation layer is SQL-first (SQL + lightweight dbt-style templating). No bespoke data-processing microservices in Java/Scala/Go and no hand-rolled ETL code the analyst can't read.",
+    "rationale": "maintainable by one semi-technical analyst"
+  },
+  {
+    "id": "INV-6",
+    "category": "business_rule",
+    "statement": "Identity resolution (matching the same customer across the app and aggregators) must be deterministic and auditable with documented matching keys. No opaque/black-box ML merging the analyst cannot explain or trace.",
+    "rationale": "trust in the numbers and PII traceability"
+  }
+]
